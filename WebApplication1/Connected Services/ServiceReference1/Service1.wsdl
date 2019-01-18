@@ -3,19 +3,13 @@
   <wsp:Policy wsu:Id="WS2007HttpBinding_IService1_policy">
     <wsp:ExactlyOne>
       <wsp:All>
-        <sp:SymmetricBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+        <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
           <wsp:Policy>
-            <sp:ProtectionToken>
+            <sp:TransportToken>
               <wsp:Policy>
-                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
-                  <wsp:Policy>
-                    <sp:RequireDerivedKeys />
-                    <sp:RequireThumbprintReference />
-                    <sp:WssX509V3Token10 />
-                  </wsp:Policy>
-                </sp:X509Token>
+                <sp:HttpsToken />
               </wsp:Policy>
-            </sp:ProtectionToken>
+            </sp:TransportToken>
             <sp:AlgorithmSuite>
               <wsp:Policy>
                 <sp:Basic256 />
@@ -27,10 +21,8 @@
               </wsp:Policy>
             </sp:Layout>
             <sp:IncludeTimestamp />
-            <sp:EncryptSignature />
-            <sp:OnlySignEntireHeadersAndBody />
           </wsp:Policy>
-        </sp:SymmetricBinding>
+        </sp:TransportBinding>
         <sp:EndorsingSupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
           <wsp:Policy>
             <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
@@ -39,13 +31,14 @@
                 <sp:WssX509V3Token10 />
               </wsp:Policy>
             </sp:X509Token>
+            <sp:SignedParts>
+              <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+            </sp:SignedParts>
           </wsp:Policy>
         </sp:EndorsingSupportingTokens>
         <sp:Wss11 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
           <wsp:Policy>
             <sp:MustSupportRefThumbprint />
-            <sp:MustSupportRefEncryptedKey />
-            <sp:RequireSignatureConfirmation />
           </wsp:Policy>
         </sp:Wss11>
         <sp:Trust13 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
@@ -56,82 +49,6 @@
           </wsp:Policy>
         </sp:Trust13>
         <wsaw:UsingAddressing />
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WS2007HttpBinding_IService1_GetData_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WS2007HttpBinding_IService1_GetData_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WS2007HttpBinding_IService1_GetDataUsingDataContract_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WS2007HttpBinding_IService1_GetDataUsingDataContract_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
-          <sp:Body />
-        </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
@@ -170,38 +87,27 @@
     <wsdl:operation name="GetData">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetData" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WS2007HttpBinding_IService1_GetData_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WS2007HttpBinding_IService1_GetData_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetDataUsingDataContract">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetDataUsingDataContract" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WS2007HttpBinding_IService1_GetDataUsingDataContract_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WS2007HttpBinding_IService1_GetDataUsingDataContract_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="WS2007HttpBinding_IService1" binding="tns:WS2007HttpBinding_IService1">
-      <soap12:address location="http://localhost:64157/Service1.svc" />
+      <soap12:address location="https://localhost:44383/Service1.svc" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:64157/Service1.svc</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
-            <X509Data>
-              <X509Certificate>MIIDCDCCAfSgAwIBAgIQctr9bxCG0IJFDloG4GakZTAJBgUrDgMCHQUAMBQxEjAQBgNVBAMTCWxvY2FsaG9zdDAeFw0xOTAxMTYxNTQyNTJaFw0zOTEyMzEyMzU5NTlaMBQxEjAQBgNVBAMTCWxvY2FsaG9zdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALPOMLYvJgTlSkAehvYGWCYkYmTyYrBTiBTH3NirZ2xJqaJ9GPmnp4h+OHZpJme+YL48sO2cdhyCvyfLHw8ywEsF+I0PHMvreCVMdS86nVZNFCPDdUprhNDg/A1DtzVfTXMXhQRUNfGI2g9mr1yNOY6YguTCCqspUcSDFeEBA4GJBjvu1wftF5QgO76tA9eWrNihPLsWbwZzkgIAamp0PSsclp3mhe3LljXI3mQUQUzk3ykI27eIZ5U9u/P3cWVDZwwpGAzXFI+bKNBIVFjNz/5ebQfshN4F1Cd9pp+CKPJOafhjLEpLVJQrc42qiPtMtMe+it0PXHW8XrFHc3jGO4cCAwEAAaNeMFwwEwYDVR0lBAwwCgYIKwYBBQUHAwEwRQYDVR0BBD4wPIAQeRR8rEHSEQ3IyhfXxKgTtqEWMBQxEjAQBgNVBAMTCWxvY2FsaG9zdIIQctr9bxCG0IJFDloG4GakZTAJBgUrDgMCHQUAA4IBAQCUsUjcQSVK/MtKURTLpz6H5xpgmfl+0PzgkqoEDOrxIAobNdm4hAC5kQ2Yr/PDNDBCuFcNZPjBFZfOqtc30pKsp/piCDxdpiYGIsx2H8LXA7Rz59unXgUGw02r0sxdt2cYT1MZy28nfaZoKVzhsF8iaOnJkzzoSikEKdE2b6nz/U2y5SwMsBY0q+8w3gPc7pIsH9qzqJUSkH41R1+69AtSkp57mONtX3ZE910YR+0KMSibg5pAcSnUGpR7k0iD6q0YN1JdMDuOxHIIoM63D0KtNDodjAtyu2oLmNmk5BAeV0kmciCU+B4iEfDhx3HCS/EDc10A3+3VO8+aDx65iVRK</X509Certificate>
-            </X509Data>
-          </KeyInfo>
-        </Identity>
+        <wsa10:Address>https://localhost:44383/Service1.svc</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

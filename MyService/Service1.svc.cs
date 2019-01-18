@@ -27,7 +27,7 @@ namespace MyService
             }
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Role = "ServiceGroup")]
+        //[PrincipalPermission(SecurityAction.Demand, Role = "ServiceGroup")]
         public string GetData(int value)
         {
             PermissionHelper.CheckPermission(System.Configuration.ConfigurationManager.AppSettings["GetDataGroup"]);

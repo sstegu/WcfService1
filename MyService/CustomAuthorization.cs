@@ -29,24 +29,24 @@ namespace MyService
         public bool Evaluate(EvaluationContext evaluationContext, ref object state)
         {
             try
-            {             
+            {
 
                 X509Certificate2 cert = ((X509CertificateClaimSet)evaluationContext.ClaimSets[0]).X509Certificate;
                 string thumbPrint = cert.Thumbprint;
                 string acct = System.Configuration.ConfigurationManager.AppSettings[thumbPrint];
 
 
-                using (var winId = new System.Security.Principal.WindowsIdentity(acct))
-                {
+                var winId = new System.Security.Principal.WindowsIdentity(acct);
 
-                    using (var wClaimSet = new WindowsClaimSet(winId))
-                    {
-                        evaluationContext.Properties["Principal"] = new WindowsPrincipal(winId);
 
-                        evaluationContext.AddClaimSet(this, wClaimSet);
-                    }
+                var wClaimSet = new WindowsClaimSet(winId);
 
-                }
+                evaluationContext.Properties["Principal"] = new WindowsPrincipal(winId);
+
+                evaluationContext.AddClaimSet(this, wClaimSet);
+
+
+
 
 
                 return true;
